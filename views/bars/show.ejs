@@ -1,0 +1,26 @@
+<h1>Hi from Bars show</h1>
+
+<h2><%= bar.name %></h2>
+<h3><%= bar.location %></h3>
+<h4>Beers We have:</h4>
+<% bar.beers.forEach(function(beer) { %>
+    <p><%= beer.name %></p>
+    <p><%= beer.style %></p>
+  <% }) %>
+  <hr>
+  <form method="POST" action="/bars/<%= bar._id %>/beers">
+    <select name="beerId">
+      <% beers.forEach(function(beer) { %>
+        <% if (!bar.beers.some(b => b == beer.id)) { %>
+           <option value="<%= beer._id %>"><%= beer.name %></option>
+        <% } %>
+      <% }); %>
+    </select>
+    <input type="submit" value="Add Beer">
+  </form>
+  <form method="POST" action="/bars/<%= bar.id %>?_method=DELETE">
+    <button type="submit" value="<%= bar.id %>">Delete Bar</button>
+  </form>
+
+  <a href="/bars/<%= bar.id %>/edit">Edit Bar</a> |
+  <a href="/bars">Back to Bars</a>

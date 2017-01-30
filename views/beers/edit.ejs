@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Beer</title>
+</head>
+<body>
+<h1>Edit Beer</h1>
+  <form action="/beers<%= beer.name ? '/' + beer.id + '?_method=PUT' : '' %>" method="post">
+    <label>Name:
+      <input type="text" name="name" value="<%= beer.name ? beer.name : '' %>">
+    </label><br>
+    <label>style:
+      <input type="text" name="style" value="<%= beer.style ? beer.style : '' %>">
+    </label><br>
+    <input type="submit" value="<%= beer.name ? 'Update' : 'Add' %> Beer">
+  </form>
+  <a href="/beers/<%= beer.id %>">Go back</a>
+</body>
+</html>

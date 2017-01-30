@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Bar</title>
+</head>
+<body>
+<h1>Edit Bar</h1>
+  <form action="/bars<%= bar.name ? '/' + bar.id + '?_method=PUT' : '' %>" method="post">
+    <label>Name:
+      <input type="text" name="name" value="<%= bar.name ? bar.name : '' %>">
+    </label><br>
+    <label>Location:
+      <input type="text" name="location" value="<%= bar.location ? bar.location : '' %>">
+    </label><br>
+    <input type="submit" value="<%= bar.name ? 'Update' : 'Add' %> Bar">
+  </form>
+  <a href="/bars/<%= bar.id %>">Go back</a>
+</body>
+</html>

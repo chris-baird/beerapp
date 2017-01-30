@@ -1,0 +1,20 @@
+<h1>All Bars</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Location</th>
+  </tr>
+  <% bars.forEach(function(bar) { %>
+    <tr>
+      <td><%= bar.name %></td>
+      <td><%= bar.location %></td>
+    <td>
+      <a href="bars/<%= bar.id %>">See Bar</a>
+    </td>
+    </tr>
+  <% }) %>
+</table>
+<hr>
+<a href="bars/new">Add Bar</a> |
+<a href="/beers">See Beers</a>
+

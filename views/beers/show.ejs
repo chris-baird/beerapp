@@ -1,0 +1,15 @@
+<h1>Hi from Beers show</h1>
+
+<h2><%= beer.name %></h2>
+<h3><%= beer.style %></h3>
+<h4>Bars you can find me:</h4>
+<% beer.bars.forEach(function(bar) { %>
+    <p><%= bar.name %></p>
+    <p><%= bar.location %></p>
+  <% }) %>
+  <hr>
+  <form method="POST" action="/beers/<%= beer.id %>?_method=DELETE">
+    <button type="submit" value="<%= beer.id %>">Delete Beer</button>
+  </form>
+  <a href="/beers/<%= beer.id %>/edit">Edit beer</a> |
+  <a href="/beers">Back to Beers</a>
