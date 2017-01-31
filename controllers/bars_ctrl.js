@@ -9,7 +9,8 @@ module.exports = {
   edit: edit,
   updateBar: updateBar,
   deleteBar: deleteBar,
-  addBeer: addBeer
+  addBeer: addBeer,
+  removeBeer: removeBeer
 }
 
 function index(req, res) {
@@ -19,8 +20,8 @@ function index(req, res) {
 }
 
 function show(req, res) {
-  Bar.findById(req.params.id, function(err, bar) {
-    Beer.find({}, function(err, beers) {
+  Bar.findById(req.params.id).populate('beers').exec(function(err, bar) {
+    Beer.find({}).exec(function(err, beers) {
       res.render('bars/show', {bar: bar, beers: beers})
     })
   })
@@ -75,6 +76,20 @@ function deleteBar(req, res) {
   Bar.findByIdAndRemove(req.params.id, function(err) {
     res.redirect('/bars');
   });
+}
+
+function removeBeer(req, res, next) {
+ Bar.findById(req.params.id, function(err, bar) {
+   bar.beers.remove(req.body.beerId);
+   bar.save(function(err) {
+     Beer.findById(req.body.beerId, function(err, beer) {
+       beer.bars.remove(req.params.id);
+       beer.save(function(err) {
+         res.redirect('/bars/' + bar._id);
+       });
+     });
+   });
+ });
 }
 
 

@@ -1,17 +1,20 @@
 <h1>Hi from Bars show</h1>
-
 <h2><%= bar.name %></h2>
 <h3><%= bar.location %></h3>
 <h4>Beers We have:</h4>
 <% bar.beers.forEach(function(beer) { %>
     <p><%= beer.name %></p>
     <p><%= beer.style %></p>
-  <% }) %>
+    <form method="post" action="/bars/<%= bar.id %>/beers/delete?_method=DELETE">
+      <button class="btn btn-default" type="submit" value="<%= beer.id %>" name="beerId">Delete</button>
+    </form>
+<% }) %>
   <hr>
   <form method="POST" action="/bars/<%= bar._id %>/beers">
     <select name="beerId">
       <% beers.forEach(function(beer) { %>
-        <% if (!bar.beers.some(b => b == beer.id)) { %>
+        <%= beer %>
+        <% if (!bar.beers.some(b => b.id == beer.id)) { %>
            <option value="<%= beer._id %>"><%= beer.name %></option>
         <% } %>
       <% }); %>

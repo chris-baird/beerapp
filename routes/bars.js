@@ -19,5 +19,7 @@ router.delete('/:id', barsCtrl.deleteBar);
 
 router.post('/:id/beers', barsCtrl.addBeer);
 
+router.delete('/:id/beers/delete', barsCtrl.removeBeer);
+
 
 module.exports = router;
